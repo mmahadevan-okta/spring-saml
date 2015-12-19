@@ -7,6 +7,10 @@ if [[ "$#" -eq 1 ]] && [[ -f $1 ]]; then
 	api_token=${API_TOKEN}
 
 	SAML_SP_IP_ADDRESS=`docker-machine ip default`
+	if [ $? -ne 0 ]; then
+	  echo "ERROR: Unable to detect IP address from docker!"
+	  exit 1
+	fi
 #	echo docker-machine ip: $SAML_SP_IP_ADDRESS
 
 	containerHost="http://$SAML_SP_IP_ADDRESS:8080/spring-security-saml2-sample/saml"
